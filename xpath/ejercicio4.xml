@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE agencia SYSTEM "ejercicio4.dtd">
+<agencia>
+  <nombre>Weroad</nombre>
+  <web>https://www.weroad.es/</web>
+  <viajes>
+    <viaje id="balijun">
+      <nombre>Bali 360</nombre>
+      <precio>799</precio>
+      <salida mes="junio" />
+    </viaje>
+    <viaje id="srijul">
+      <nombre>Sri Lanka 360 summer</nombre>
+      <precio>999</precio>
+      <salida mes="julio" />
+    </viaje>
+    <viaje id="panago">
+      <nombre>Panamá</nombre>
+      <precio>1780</precio>
+      <salida mes="agosto" />
+    </viaje>
+    </viajes>
+</agencia>

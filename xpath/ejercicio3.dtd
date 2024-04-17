@@ -1,0 +1,13 @@
+<!ELEMENT libro (titulo,autor,capitulo+,apendice)>
+<!ELEMENT titulo (#PCDATA)>
+<!ELEMENT autor (#PCDATA)>
+<!ELEMENT capitulo (#PCDATA|parrafo)*>
+<!ATTLIST capitulo num NMTOKEN #REQUIRED>
+<!ATTLIST capitulo public NMTOKEN #IMPLIED>
+<!ELEMENT parrafo (#PCDATA|enlace)*>
+<!ATTLIST parrafo destacar NMTOKEN #IMPLIED>
+<!ELEMENT enlace (#PCDATA)>
+<!ATTLIST enlace href CDATA #REQUIRED>
+<!ELEMENT apendice (#PCDATA|parrafo)*>
+<!ATTLIST apendice num NMTOKEN #REQUIRED>
+<!ATTLIST apendice public NMTOKEN #REQUIRED>

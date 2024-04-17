@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Espacios en los atributos)-->
+<!--Atributos bien puestos-->
+<figuras>
+    <figura_plana>
+        <nombre>cuadrado</nombre>
+            <lados numero="4"> </lados>
+    </figura_plana>  
+    <figura_plana>
+        <nombre>triángulo</nombre>
+            <lados numero="3"> </lados>  
+    </figura_plana>
+    <figura_tridimensional>
+        <nombre>cubo</nombre>
+        <aristas numero="12"> </aristas>
+        <caras numero="6"> </caras>
+    </figura_tridimensional>
+</figuras>

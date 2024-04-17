@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE forma_geometrica SYSTEM "Ejercicio1.dtd">
+<forma_geometrica>
+<nombre>rombo</nombre>
+<caracteristicas>
+<color>naranja</color>
+<tipo>plana</tipo>
+</caracteristicas>
+<numero_de_lados>4</numero_de_lados>
+</forma_geometrica>

@@ -1,0 +1,46 @@
+Ejercicio 1
+    1. //titulo/text()
+    2. //libro[1]/titulo/text()
+    3. //precio/text()
+    4. //libro[precio>35]/precio/text()
+    5. //libro[precio>35]/titulo/text()
+Ejercicio 2
+    1. /universidad/nombre/text()
+    2. //carrera/nombre/text()
+    3. //alumno/nombre/text()
+    4. //carrera/@id
+    5. //carrera[@id="c01"]/*/text()
+    6. //carrera[@id="c02"]/centro/text()
+    7. //carrera[@id=//estudios/carrera/@codigo]/@id
+    8. //carrera[@id=//alumnos/alumno[last()]/estudios/carrera/@codigo]/@id
+    9. //asignaturas/asignatura[creditos_teoricos="4"]/nombre/text()
+    10. //alumnos/alumno[sexo="Mujer"]/@id
+Ejercicio 3
+    1. //titulo/text()
+    2. //autor/text()
+    3. //parrafo/node()
+    4. //capitulo/@num
+    5. //libro/capitulo[@public]/node()
+    6. //parrafo[@destacar]/node()
+    7. //apendice/@num
+    8. //parrafo/enlace/@href
+    9. //capitulo/parrafo[@*]
+    10. //parrafo/node()
+    11. //parrafo/enlace[@href]/../text()
+    12. //node()[parrafo]/node()
+    13. //capitulo/parrafo/../node()
+    14. //parrafo/../node()
+    15. //parrafo/node()
+    16. //parrafo/text()
+    17. //capitulo[last()]
+Ejercicio 4
+    1. //agencia/nombre/text()
+    2. //agencia/web/text()
+    3. //viaje/nombre/text()
+    4. //viaje/@id
+    5. //@mes
+    6. //viaje[@id="panago"]/nombre/text()
+    7. //viaje[precio<1000]/node()/text()
+    8. //viaje/salida[@mes="julio"]/../nombre
+    9. //viaje/salida[@mes="junio"]/../node() | //viaje[precio>1200]/node()
+    10. //viaje[@id="balijun"]/nombre/text() | //viaje[@id="balijun"]/precio/text()

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE cartelera SYSTEM "Ejercicio7.dtd">
+<cartelera>
+  <pelicula codigo="p1" duracion="118" anio="2022">
+    <titulo>EL TRIÁNGULO DE LA TRISTEZA</titulo>
+    <titulo_original>Triangle of Sadness</titulo_original>
+    <nacionalidad>Suecia</nacionalidad>
+    <genero>Drama</genero>
+    <genero>Sátira</genero>
+    <genero>Comedia</genero>
+    <clasificacion edad="18"/>
+    <sinopsis>
+        Tras la Semana de la moda, Carl y Yaya, pareja de modelos e influencers, son invitados a un yate en un crucero de lujo. Mientras que la tripulación brinda todas las atenciones necesarias a los ricos invitados, el capitán se niega a salir de su cabina, a pesar de la llegada inminente de la célebre cena de gala. Los eventos toman un giro inesperado y el equilibrio de poder se invierte cuando se levanta una tormenta que pone en peligro el confort de los pasajeros.
+    </sinopsis>
+    <director>Ruben Östlund</director>
+    <reparto>
+      <actor>Harris Dickinson</actor>
+      <actor>Woody Harrelson</actor>
+      <actriz>Charlbi Dean</actriz>
+    </reparto>
+    <web>https://www.youtube.com/watch?v=izxl6zgYnjs</web>
+    <cartel>triangulo.jpg</cartel>
+  </pelicula>
+  <pelicula codigo="p17" duracion="169">
+    <titulo>CERRAR LOS OJOS</titulo>
+    <nacionalidad>España</nacionalidad>
+    <genero>Drama</genero>
+    <sin_clasificar/>
+    <sinopsis>
+        Un célebre actor español, Julio Arenas, desaparece durante el rodaje de una película. Aunque nunca se llega a encontrar su cadáver, la policía concluye que ha sufrido un accidente al borde del mar. Muchos años después, esta suerte de misterio vuelve a la actualidad a raíz de un programa de televisión que pretende evocar la figura del actor, ofreciendo como primicia imágenes de las últimas escenas en que participó, rodadas por el que fue su íntimo amigo, el director Miguel Garay.
+    </sinopsis>
+    <director>Víctor Erice</director>
+    <reparto>
+      <actor>Josep María Pou</actor>
+      <actriz>Soledad Villamil</actriz>
+      <actor>Manolo Solo</actor>
+      <actriz>Ana Torrent</actriz>
+      <actor>José Coronado</actor>
+      <actriz>María León</actriz>
+    </reparto>
+  </pelicula>
+</cartelera>

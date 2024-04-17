@@ -1,0 +1,4 @@
+<!ELEMENT ciudades (ciudad+)> <!--  ciudad con '+' porque hay más de 1 ciudad -->
+<!ELEMENT ciudad (nombre,capital?)> <!-- tiene que haber un '?' en el capital ya que no es obligatorio -->
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT capital EMPTY>

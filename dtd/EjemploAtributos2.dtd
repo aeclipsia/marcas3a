@@ -1,0 +1,6 @@
+<!ELEMENT deportistas (f1+,tenis)>
+<!ELEMENT f1 (#PCDATA)>
+<!ATTLIST f1 pais CDATA #IMPLIED>
+<!ATTLIST f1 fecha_de_nacimiento CDATA #IMPLIED>
+<!ATTLIST f1 equipo NMTOKEN #REQUIRED>
+<!ELEMENT tenis (#PCDATA)>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE deportistas SYSTEM "EjemploAtributos.dtd">
+<deportistas>
+    <f1 pais="Reino Unido">Lewis Hamilton</f1>
+    <f1>Carlos Sainz Jr.</f1>
+    <tenis>Carlos Alcaraz</tenis>
+</deportistas>

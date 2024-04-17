@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zoo>
+    <jaula>
+        <numero tipo="foso">1</numero>
+        <metros>1000</metros>
+        <animales>
+            <animal>
+                <id>100</id>
+                <especie>Elefante</especie>
+                <fecha_nacimiento>
+                    <dia>1</dia>
+                    <mes>1</mes>
+                    <ano>2000</ano>
+                </fecha_nacimiento>
+                <madre>10</madre>
+                <padre>11</padre>
+            </animal>
+            <animal>
+                <id>10</id>
+                <especie>Elefante</especie>
+                <fecha_nacimiento>
+                    <dia>12</dia>
+                    <mes>11</mes>
+                    <ano>1985</ano>
+                </fecha_nacimiento>
+            </animal>
+            <animal>
+                <id>11</id>
+                <especie>Elefante</especie>
+                <fecha_nacimiento>
+                    <dia>2</dia>
+                    <mes>12</mes>
+                    <ano>1984</ano>
+                </fecha_nacimiento>
+            </animal>
+        </animales>
+    </jaula>
+</zoo>

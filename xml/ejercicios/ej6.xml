@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<futbol>
+    <equipos>
+        <nombre_equipo>Real Madrid</nombre_equipo>
+        <ciudad_equipo>Madrid</ciudad_equipo>
+        <entrenador/>
+        <jugadores>
+            <jugador>
+                <nombre posicion='medio'>Jude Bellingham</nombre>
+                <nacionalidad>Inglés</nacionalidad>
+            </jugador>
+            <jugador>
+                <nombre posicion='medio'>Luka Modric</nombre>
+                <nacionalidad>Croata</nacionalidad>
+            </jugador>
+        </jugadores>
+    </equipos>
+    <equipos>
+        <nombre_equipo>Paris Saint-Germain</nombre_equipo>
+        <ciudad_equipo>Paris</ciudad_equipo>
+        <entrenador/>
+        <jugadores>
+            <jugador>
+                <nombre posicion='delantero'>Kylian Mbappé</nombre>
+                <nacionalidad>Francés</nacionalidad>
+            </jugador>
+            <jugador>
+                <nombre posicion='delantero'>Ousmane Dembélé</nombre>
+                <nacionalidad>Francés</nacionalidad>
+            </jugador>
+        </jugadores>
+    </equipos>
+</futbol>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CATALOGO>
+    <ALBUM>
+        <TITULO formato="mp3">Utopia</TITULO>
+        <ARTISTA anio="2023">Travis Scott</ARTISTA>
+        <PRECIO>50</PRECIO>
+    </ALBUM>
+    <ALBUM>
+        <TITULO formato="CD">Thriller</TITULO>
+        <ARTISTA anio="1982">Michael Jackson</ARTISTA>
+        <DISCOGRAFICA></DISCOGRAFICA>
+        <PRECIO></PRECIO>
+    </ALBUM>
+</CATALOGO>

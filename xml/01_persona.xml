@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE personas SYSTEM "01_persona.dtd">
+<personas>
+   <persona>
+      <nombre>Elsa</nombre>
+      <mujer/> 
+      <fecha_de_nacimiento>
+        <dia>18</dia>
+        <mes>6</mes>
+         <anio>1998</anio>
+      </fecha_de_nacimiento>
+      <ciudad>Pamplona</ciudad>
+   </persona>
+   <persona>
+      <nombre>Rodrigo</nombre>
+      <hombre/> 
+      <fecha_de_nacimiento>
+        <dia>3</dia>
+        <mes>1</mes>
+         <anio>1998</anio>
+      </fecha_de_nacimiento>
+      <ciudad>Murcia</ciudad>
+   </persona>
+</personas>

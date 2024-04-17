@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ejercicio3c.xsl"?>
+<!DOCTYPE colegio SYSTEM "ejercicio3.dtd">
+<colegio>
+	<curso>
+		<nombre>DAW</nombre>
+		<nivel>1</nivel>
+		<alumno>
+			<nombre-alumno>Juan</nombre-alumno>
+			<asignatura>
+					<nombre-asignatura>Marcas</nombre-asignatura>
+					<falta>
+						<numero>1</numero>
+						<fecha dia="Martes">2024-02-13</fecha>
+						<motivo>medico</motivo>
+					</falta>
+					<falta>
+						<numero>0.5</numero>
+						<fecha dia="Miércoles">2024-02-14</fecha>
+					</falta>
+			</asignatura>
+			<asignatura>
+					<nombre-asignatura>Base de datos</nombre-asignatura>
+			</asignatura>
+		</alumno>
+		
+		<alumno tipo="repetidor">
+			<nombre-alumno>Pedro</nombre-alumno>
+			<asignatura>
+					<nombre-asignatura>Sistemas</nombre-asignatura>
+			</asignatura>
+			<asignatura>
+				<nombre-asignatura>Marcas</nombre-asignatura>
+					<falta>
+						<numero>1</numero>
+						<fecha dia="Viernes">2024-02-16</fecha>
+					</falta>
+			</asignatura>
+		</alumno>
+		
+	</curso>
+
+	<curso>
+		<nombre>DAW</nombre>
+		<nivel>2</nivel>
+		<alumno>
+			<nombre-alumno>Ana</nombre-alumno>
+			<asignatura>
+					<nombre-asignatura>Despliegue</nombre-asignatura>
+					<falta>
+						<numero>1</numero>
+						<fecha dia="Lunes">2024-02-12</fecha>
+						<motivo>renfe</motivo>
+					</falta>
+				</asignatura>
+				<asignatura>
+					<nombre-asignatura>Interfaces</nombre-asignatura>
+					<falta>
+						<numero>0.5</numero>
+						<fecha dia="Miércoles">2024-02-14</fecha>
+					</falta>
+			</asignatura>
+			<asignatura>
+					<nombre-asignatura>Cliente</nombre-asignatura>
+			</asignatura>
+		</alumno>
+		<alumno>
+			<nombre-alumno>Luis</nombre-alumno>
+			<asignatura>
+					<nombre-asignatura>Interfaces</nombre-asignatura>
+			</asignatura>
+		</alumno>
+	</curso>
+</colegio>

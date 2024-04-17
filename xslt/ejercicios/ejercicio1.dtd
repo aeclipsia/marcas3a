@@ -1,0 +1,8 @@
+<!ELEMENT libreria (libro+)>
+<!ELEMENT libro (titulo,autor+,anio,precio)>
+<!ATTLIST libro categoria NMTOKEN #REQUIRED>
+<!ELEMENT titulo (#PCDATA)>
+<!ATTLIST titulo idioma NMTOKEN #IMPLIED>
+<!ELEMENT autor (#PCDATA)>
+<!ELEMENT anio (#PCDATA)>
+<!ELEMENT precio (#PCDATA)>

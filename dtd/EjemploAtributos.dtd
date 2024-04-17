@@ -1,0 +1,4 @@
+<!ELEMENT deportistas (f1+,tenis)>
+<!ELEMENT f1 (#PCDATA)>
+<!ATTLIST f1 pais CDATA #IMPLIED>
+<!ELEMENT tenis (#PCDATA)>

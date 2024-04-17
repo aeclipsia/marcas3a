@@ -1,0 +1,6 @@
+<!ELEMENT forma_geometrica (nombre,caracteristicas,numero_de_lados)> <!-- ',' en vez de '|' -->
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT caracteristicas (color,tipo)> <!-- faltaba esta fila -->
+<!ELEMENT color (#PCDATA)>
+<!ELEMENT tipo (#PCDATA)>
+<!ELEMENT numero_de_lados (#PCDATA)>

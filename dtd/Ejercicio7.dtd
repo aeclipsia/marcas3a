@@ -1,0 +1,19 @@
+<!ELEMENT cartelera (pelicula+)>
+<!ELEMENT pelicula (titulo,titulo_original?,nacionalidad,genero+, (clasificacion | sin_clasificar)? ,sinopsis,director,reparto,web?,cartel?)>
+<!ATTLIST pelicula codigo NMTOKEN #REQUIRED>
+<!ATTLIST pelicula duracion NMTOKEN #IMPLIED>
+<!ATTLIST pelicula anio NMTOKEN "2023">
+<!ELEMENT titulo (#PCDATA)>
+<!ELEMENT titulo_original (#PCDATA)>
+<!ELEMENT nacionalidad (#PCDATA)>
+<!ELEMENT genero (#PCDATA)>
+<!ELEMENT clasificacion EMPTY>
+<!ELEMENT sin_clasificar EMPTY>
+<!ATTLIST clasificacion edad ( 8 | 12 | 16 | 18) #REQUIRED>
+<!ELEMENT sinopsis (#PCDATA)>
+<!ELEMENT director (#PCDATA)>
+<!ELEMENT reparto (actor | actriz)*>
+<!ELEMENT actor (#PCDATA)>
+<!ELEMENT actriz (#PCDATA)>
+<!ELEMENT web (#PCDATA)>
+<!ELEMENT cartel (#PCDATA)>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<animales>
+    <animal>
+        <nombre>Perro</nombre>
+        <patas>4</patas>
+    </animal>
+    <animal>
+        <nombre>Pollo</nombre>
+        <patas>2</patas>
+    </animal>
+    <animal>
+        <nombre>Hormiga</nombre>
+        <patas>6</patas>
+    </animal>
+</animales>

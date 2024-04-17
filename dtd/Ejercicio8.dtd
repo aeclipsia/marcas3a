@@ -1,0 +1,6 @@
+<!ELEMENT libro-recetas (receta)+>
+<!ELEMENT receta (titulo, ingrediente+, preparacion,truco?)>
+<!ELEMENT titulo (#PCDATA)>
+<!ELEMENT ingrediente (#PCDATA)>
+<!ELEMENT preparacion (#PCDATA)>
+<!ELEMENT truco (#PCDATA)>

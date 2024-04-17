@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Espacios en las llaves, el atributo Madrid debe estar al abrir no al cerrar-->
+<geografia_mundial>
+    <pais>
+    <pais>España</pais>
+    <continente>Europa</continente>
+    <capital nombre="Madrid"></capital>
+</pais>
+</geografia_mundial>

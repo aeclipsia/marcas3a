@@ -1,0 +1,14 @@
+<!ELEMENT colegio (curso+)>
+<!ELEMENT curso (nombre,nivel,alumno+)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT nivel (#PCDATA)>
+<!ELEMENT alumno (nombre-alumno,asignatura+)>
+<!ATTLIST alumno tipo NMTOKEN #IMPLIED>
+<!ELEMENT nombre-alumno (#PCDATA)>
+<!ELEMENT asignatura (nombre-asignatura,falta*)>
+<!ELEMENT nombre-asignatura (#PCDATA)>
+<!ELEMENT falta (numero,fecha,motivo?)>
+<!ELEMENT numero (#PCDATA)>
+<!ELEMENT fecha (#PCDATA)>
+<!ATTLIST fecha dia NMTOKEN #REQUIRED>
+<!ELEMENT motivo (#PCDATA)>

@@ -1,0 +1,9 @@
+<!ELEMENT agencia (nombre,web,viajes)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT web (#PCDATA)>
+<!ELEMENT viajes (viaje+)>
+<!ELEMENT viaje (nombre,precio,salida)>
+<!ATTLIST viaje id NMTOKEN #REQUIRED>
+<!ELEMENT precio (#PCDATA)>
+<!ELEMENT salida EMPTY>
+<!ATTLIST salida mes NMTOKEN #REQUIRED>

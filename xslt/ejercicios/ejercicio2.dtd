@@ -1,0 +1,12 @@
+<!ELEMENT parque (atraccion+)>
+<!ELEMENT atraccion (nombre,foto,altura-maxima?,altura-minima?,revision+)>
+<!ATTLIST atraccion apta NMTOKEN #REQUIRED>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT foto (#PCDATA)>
+<!ELEMENT altura-maxima (#PCDATA)>
+<!ELEMENT revision (codigo,fecha,descripcion)>
+<!ATTLIST revision tipo NMTOKEN #REQUIRED>
+<!ELEMENT codigo (#PCDATA)>
+<!ELEMENT fecha (#PCDATA)>
+<!ELEMENT descripcion (#PCDATA)>
+<!ELEMENT altura-minima (#PCDATA)>

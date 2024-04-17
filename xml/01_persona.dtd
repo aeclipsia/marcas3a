@@ -1,0 +1,10 @@
+<!ELEMENT personas (persona+)>
+<!ELEMENT persona (nombre,(mujer|hombre),fecha_de_nacimiento,ciudad)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT mujer EMPTY>
+<!ELEMENT hombre EMPTY>
+<!ELEMENT fecha_de_nacimiento (dia,mes,anio)>
+<!ELEMENT dia (#PCDATA)>
+<!ELEMENT mes (#PCDATA)>
+<!ELEMENT anio (#PCDATA)>
+<!ELEMENT ciudad (#PCDATA)>

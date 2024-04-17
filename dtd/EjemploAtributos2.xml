@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE deportistas SYSTEM "EjemploAtributos2.dtd">
+<deportistas>
+    <f1 pais="Reino Unido" fecha_de_nacimiento="07/01/1985" equipo="Mercedes">Lewis Hamilton</f1>
+    <f1 equipo="Ferrari">Carlos Sainz Jr.</f1>
+    <tenis>Carlos Alcaraz</tenis>
+</deportistas>

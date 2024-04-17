@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pedido>
+    <nombre>Inmaculada García</nombre>
+    <contenido>Bicicleta</contenido>
+    <lugar>
+        <calle>Barco</calle>
+        <numero>4</numero>
+        <piso>tercero</piso>
+        <letra>A</letra>
+    </lugar>   
+    <fecha>
+        <dia>19</dia>
+        <mes>1</mes>
+        <ano>2023</ano>
+    </fecha>
+</pedido>

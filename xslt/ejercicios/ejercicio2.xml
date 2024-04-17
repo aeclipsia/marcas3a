@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ejercicio2a.xsl"?>
+<!DOCTYPE parque SYSTEM "ejercicio2.dtd">
+<parque>
+    <atraccion apta="no">
+      <nombre>Fiordos</nombre>
+      <foto>fiordos.jpg</foto>
+      <altura-maxima>2.25</altura-maxima>
+      <revision tipo="anual">
+        <codigo>B-312</codigo>
+        <fecha>2024-01-07</fecha>
+        <descripcion>Coches y barreras protectoras</descripcion>
+      </revision>
+        <revision tipo="mensual">
+        <codigo>B-12</codigo>
+        <fecha>2024-01-04</fecha>
+        <descripcion>Puentes</descripcion>
+      </revision>
+      <revision tipo="anual">
+        <codigo>B-32</codigo>
+        <fecha>2024-02-06</fecha>
+        <descripcion>Total</descripcion>
+      </revision>
+    </atraccion>   
+    <atraccion apta="no">
+      <nombre>Aserradero</nombre>
+      <foto>aserradero.jpg</foto>
+      <revision tipo="diaria">
+        <codigo>A-123</codigo>
+        <fecha>2024-01-07</fecha>
+        <descripcion>Revisión circuito</descripcion>
+      </revision>
+    </atraccion>
+    <atraccion apta="no">
+      <nombre>Tornado</nombre>
+      <foto>tornado.jpg</foto>
+      <altura-maxima>2.25</altura-maxima>
+      <altura-minima>1.35</altura-minima>
+      <revision tipo="diaria">
+        <codigo>B-312</codigo>
+        <fecha>2024-02-06</fecha>
+        <descripcion>Circuito emergencia</descripcion>
+      </revision>
+      <revision tipo="anual">
+        <codigo>B-32</codigo>
+        <fecha>2024-02-06</fecha>
+        <descripcion>Estado agua</descripcion>
+      </revision>
+    </atraccion>
+</parque>

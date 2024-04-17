@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE libro-recetas SYSTEM "Ejercicio8.dtd">
+<libro-recetas>
+    <receta>
+        <titulo>Huevo Frito</titulo>
+        <ingrediente>Huevo</ingrediente>
+        <ingrediente>Aceite</ingrediente>
+        <preparacion>Cocinalo</preparacion>
+        <truco>Pon sal</truco>
+    </receta>
+    <receta>
+        <titulo>Cafe</titulo>
+        <ingrediente>Café</ingrediente>
+        <ingrediente>Agua caliente</ingrediente>
+        <preparacion>Mezcla café con agua</preparacion>
+    </receta>
+</libro-recetas>

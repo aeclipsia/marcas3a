@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mensaje>
+    <remite>
+        <nombre>
+        Alfredo Benito
+        </nombre>
+        <email>
+        alfredben@gmail.com
+        </email>
+    </remite>
+    <destinatario>
+        <nombre>
+        Ana Rodríguez
+        </nombre>
+        <email>
+        arodriguez@gmail.com
+        </email>
+    </destinatario>
+    <asunto>
+        Hola Ana
+    </asunto>
+
+    <texto>
+        Hola ¿qué tal?
+        Hace mucho tiempo que no escribes. A ver si llamas y quedamos pronto.
+        Un saludo.
+    </texto>
+</mensaje>
