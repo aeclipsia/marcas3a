@@ -38,7 +38,7 @@ table *{
       <th>Precio</th>
     </tr>
     <xsl:for-each select="libreria/libro">
-		<xsl:if test="precio &gt; 35">
+		<xsl:if test="precio &gt;= 35">
 			<tr>
 			  <td><xsl:value-of select="titulo"/></td>
 			  <td><xsl:value-of select="precio"/>€</td>

@@ -21,11 +21,8 @@
     <table>
       <xsl:for-each select="colegio/curso/alumno">
       <tr>
-        <xsl:if test="asignatura/falta/numero &lt;= 1">
-            <xsl:choose>
-                <td><xsl:value-of select="nombre-alumno"/>en
-                    <xsl:value-of select="asignatura/nombre-asignatura"/></td>
-            </xsl:choose>
+        <xsl:if test="asignatura/falta/numero &lt; 1">
+            <td><xsl:value-of select="nombre-alumno"/> en <xsl:value-of select="asignatura/nombre-asignatura"/></td>
         </xsl:if>
       </tr>
       </xsl:for-each>
