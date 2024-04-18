@@ -14,6 +14,12 @@
                 border: solid 1px black;
                 box-shadow: 3px 3px 3px black;
             }
+            h2{
+              text-align: center;
+              text-transform: uppercase;
+              background-color: #de4e44;
+              box-shadow: 3px 3px 3px black;
+            }
       </style>
   </head>
   <body>
