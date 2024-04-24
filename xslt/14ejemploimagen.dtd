@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT web (#PCDATA)>
+<!ELEMENT anio (#PCDATA)>
+<!ELEMENT autor (#PCDATA)>
+<!ELEMENT libro (titulo, imagen?, autor+, anio, precio, web?)>
+<!ATTLIST libro
+	categoria (diseño | filosofía | informática | juvenil | distopía | novela) #REQUIRED
+>
+<!ELEMENT imagen (#PCDATA)>
+<!ELEMENT precio (#PCDATA)>
+<!ELEMENT titulo (#PCDATA)>
+<!ATTLIST titulo
+	idioma (fr | ing | sp) #REQUIRED>
+<!ELEMENT libreria (libro+)>

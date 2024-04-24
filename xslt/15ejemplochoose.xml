@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE libreria SYSTEM "15ejemplochoose.dtd">
+<?xml-stylesheet href="15ejemplochoose3.xsl" type="text/xsl"?>
+<libreria>
+<libro categoria="juvenil">
+  <titulo idioma="ing">Harry Potter y la piedra filosofal</titulo>
+  <autor>J K. Rowling</autor>
+  <anio>1997</anio>
+  <precio>30.99</precio>
+</libro>
+<libro categoria="novela">
+  <titulo idioma="sp">El origen perdido</titulo>
+  <autor>Matilde Asensi</autor>
+  <anio>2003</anio>
+  <precio>20</precio>
+</libro>
+<libro categoria="ficción">
+  <titulo idioma="ing">Animales fantásticos y donde encontrarlos</titulo>
+  <autor>J K. Rowling</autor>
+  <anio>2001</anio>
+  <precio>19.99</precio>
+</libro>
+<libro categoria="guión">
+  <titulo idioma="ing">Los crímenes de Grindelwald</titulo>
+  <autor>J K. Rowling</autor>
+  <anio>2018</anio>
+  <precio>14.95</precio>
+</libro>
+<libro categoria="filosofía">
+  <titulo idioma="fr">Sobre la felicidad</titulo>
+  <autor>Frédéric Lenoir</autor>
+  <anio>2014</anio>
+  <precio>16.90</precio>
+</libro>
+
+<libro categoria="novela">
+  <titulo idioma="sp">El señor de las moscas</titulo>
+  <autor>William Golding</autor>
+  <anio>1972</anio>
+  <precio>9.95</precio>
+</libro>
+
+<libro categoria="juvenil">
+  <titulo idioma="ing">Harry Potter y la orden del Fénix</titulo>
+  <autor>J K. Rowling</autor>
+  <anio>2003</anio>
+  <precio>20.99</precio>
+</libro>
+
+</libreria>
