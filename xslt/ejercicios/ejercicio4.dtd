@@ -1,0 +1,14 @@
+<!ELEMENT peliculas (url, pelicula+)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT pelicula (nombre, img, direccion, animacion?, no_animacion?, anio)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT img (#PCDATA)>
+<!ELEMENT direccion (#PCDATA)>
+<!ELEMENT animacion (#PCDATA)>
+<!ELEMENT anio (#PCDATA)>
+<!ELEMENT no_animacion (actor+)>
+<!ATTLIST no_animacion
+          tipo CDATA #REQUIRED>
+<!ELEMENT actor (#PCDATA)>
+<!ATTLIST actor
+          sexo CDATA #REQUIRED>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE peliculas SYSTEM "ejercicio4.dtd">
+<?xml-stylesheet href="ejercicio4b.xsl" type="text/xsl"?>
+<peliculas>
+	<url>www.peliculas.es</url>
+	<pelicula>
+		<nombre>Toy Story 4</nombre>
+		<img>toy-story-4.jpg</img>
+		<direccion>Josh Cooley</direccion>
+		<animacion/>
+		<anio>2019</anio>
+	</pelicula>	
+	<pelicula>
+		<nombre>Soul</nombre>
+		<img>soul.jpg</img>
+		<direccion>Pete Docter</direccion>
+		<animacion/>
+		<anio>2020</anio>
+	</pelicula>
+	<pelicula>
+		<nombre>Nomadland</nombre>
+		<img>nomadland.jpg</img>
+		<direccion>Chloe Zhao</direccion>
+		<no_animacion tipo="drama">
+			<actor sexo="actriz">Frances McDormand</actor>
+			<actor sexo="actor">David Strathairn</actor>
+		</no_animacion>
+		<anio>2020</anio>
+	</pelicula>
+	<pelicula>
+		<nombre>As Bestas</nombre>
+		<img>asbestas.jpeg</img>
+		<direccion>Rodrigo Sorogoyen</direccion>
+		<no_animacion tipo="drama">
+			<actor sexo="actor">Denis Ménochet</actor>
+			<actor sexo="actriz">Marina Foïs</actor>
+			<actor sexo="actor">Luis Zahera</actor>
+		</no_animacion>
+		<anio>2022</anio>
+	</pelicula>
+	<pelicula>
+		<nombre>The Batman</nombre>
+		<img>batman.jpg</img>
+		<direccion>Matt Reeves</direccion>
+		<no_animacion tipo="drama">
+			<actor sexo="actor">Robert Pattinson</actor>
+			<actor sexo="actriz">Zöe Kravitz</actor>
+			<actor sexo="actor">Paul Dano</actor>
+		</no_animacion>
+		<anio>2022</anio>
+	</pelicula>
+</peliculas>
