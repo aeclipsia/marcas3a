@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>&#161;No toquen, mamag&#252;evo!</title>
+    <title>¡No toquen, mamagüevo!</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
@@ -74,18 +74,36 @@
         }
         #gameOverCredits {
             position: absolute;
-            bottom: 20px;
+            bottom: 10px;
             font-size: 14px;
         }
         #instructions {
             font-size: 16px;
             margin-top: 20px;
         }
+        
+        @media only screen and (max-width: 600px) {
+            #welcomeScreen h1, #gameOverScreen h2 {
+                font-size: 24px;
+            }
+            #playButton, #restartButton {
+                font-size: 14px;
+            }
+            #scoreDisplay {
+                font-size: 16px;
+            }
+            #credits, #gameOverCredits {
+                font-size: 12px;
+            }
+            #instructions {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="welcomeScreen">
-        <h1>&#161;No toquen, mamag&#252;evo!</h1>
+        <h1>¡No toquen, mamagüevo!</h1>
         <p id="instructions">Use arrow keys or WASD to move</p>
         <p id="credits">Made by: aeclipsia</p>
         <button id="playButton">Play</button>
@@ -362,6 +380,9 @@
                 localStorage.setItem('highScore', highScore); // Save new high score
             }
             highScoreDisplay.textContent = highScore; // Display high score
+            // Reset player velocity
+            player.dx = 0;
+            player.dy = 0;
         }
 
         // Restart the game
