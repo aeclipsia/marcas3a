@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>¡No toquen, mamagüevo!</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Press Start 2P', cursive;
+            background-color: #000;
+            color: #fff;
+        }
+        canvas {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #000;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #welcomeScreen, #gameOverScreen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 1);
+            color: white;
+            text-align: center;
+            z-index: 1; /* Ensure they are on top of canvas */
+        }
+        #gameOverScreen {
+            display: none; /* Initially hide game over screen */
+        }
+        #welcomeScreen h1, #gameOverScreen h2 {
+            margin: 0;
+            font-size: 36px;
+        }
+        #playButton, #restartButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        #playButton:hover, #restartButton:hover {
+            background-color: #45a049;
+        }
+        #scoreDisplay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+        }
+        #credits {
+            position: absolute;
+            bottom: 20px;
+            font-size: 14px;
+        }
+        #gameOverCredits {
+            position: absolute;
+            bottom: 20px;
+            font-size: 14px;
+        }
+        #instructions {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="welcomeScreen">
+        <h1>¡No toquen, mamagüevo!</h1>
+        <p id="instructions">Use arrow keys or WASD to move</p>
+        <p id="credits">Made by: aeclipsia</p>
+        <button id="playButton">Play</button>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <div id="gameOverScreen">
+        <h2>Game Over!</h2>
+        <p>Your Score: <span id="yourScore"></span></p>
+        <p>High Score: <span id="highScore"></span></p>
+        <p id="gameOverCredits">Made by: aeclipsia</p>
+        <button id="restartButton">Restart</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Player character
+        let player = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 10,
+            color: "transparent",
+            borderColor: "white",
+            borderWidth: 6, // Increased stroke weight for player
+            speed: 5,
+            dx: 0,
+            dy: 0,
+            trailLength: 5, // Length of the trail
+            trail: [] // Array to store trail positions
+        };
+
+        // Projectiles
+        let projectiles = [];
+
+        // Game state
+        let gameState = 'welcome'; // Possible states: welcome, game, gameOver
+
+        // Score variables
+        let score = 0;
+        let highScore = 0;
+
+        // Welcome screen elements
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const playButton = document.getElementById('playButton');
+        playButton.addEventListener('click', startGame);
+
+        // Game over screen elements
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        const restartButton = document.getElementById('restartButton');
+        restartButton.addEventListener('click', restartGame);
+        const yourScoreDisplay = document.getElementById('yourScore');
+        const highScoreDisplay = document.getElementById('highScore');
+        const gameOverCredits = document.getElementById('gameOverCredits');
+
+        // Score display element
+        const scoreDisplay = document.createElement('div');
+        scoreDisplay.id = 'scoreDisplay';
+        document.body.appendChild(scoreDisplay);
+
+        // Handle player movement
+        window.addEventListener('keydown', function (e) {
+            if (gameState !== 'game') return; // Only handle movement during the game state
+            switch (e.keyCode) {
+                case 37: // Left arrow
+                case 65: // A key
+                    player.dx = -player.speed;
+                    break;
+                case 38: // Up arrow
+                case 87: // W key
+                    player.dy = -player.speed;
+                    break;
+                case 39: // Right arrow
+                case 68: // D key
+                    player.dx = player.speed;
+                    break;
+                case 40: // Down arrow
+                case 83: // S key
+                    player.dy = player.speed;
+                    break;
+            }
+        });
+
+        window.addEventListener('keyup', function (e) {
+            if (gameState !== 'game') return; // Only handle movement during the game state
+            switch (e.keyCode) {
+                case 37: // Left arrow
+                case 65: // A key
+                case 39: // Right arrow
+                case 68: // D key
+                    player.dx = 0;
+                    break;
+                case 38: // Up arrow
+                case 87: // W key
+                case 40: // Down arrow
+                case 83: // S key
+                    player.dy = 0;
+                    break;
+            }
+        });
+
+        // Function to generate projectiles with varying speeds
+        function generateProjectiles() {
+            const minSpeed = 2;
+            const maxSpeed = 4;
+            const size = 5;
+            const colors = ["#FF0000", "#00FF00", "#0000FF"]; // Red, Green, Blue
+
+            // Randomly select side of the canvas to spawn the projectile
+            const side = Math.floor(Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
+
+            let randomX, randomY, velocityX, velocityY;
+
+            switch (side) {
+                case 0: // top
+                    randomX = Math.random() * canvas.width;
+                    randomY = -size;
+                    break;
+                case 1: // right
+                    randomX = canvas.width + size;
+                    randomY = Math.random() * canvas.height;
+                    break;
+                case 2: // bottom
+                    randomX = Math.random() * canvas.width;
+                    randomY = canvas.height + size;
+                    break;
+                case 3: // left
+                    randomX = -size;
+                    randomY = Math.random() * canvas.height;
+                    break;
+            }
+
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            const angle = Math.atan2(player.y - randomY, player.x - randomX);
+            const randomSpeed = minSpeed + Math.random() * (maxSpeed - minSpeed); // Random speed between minSpeed and maxSpeed
+            velocityX = randomSpeed * Math.cos(angle);
+            velocityY = randomSpeed * Math.sin(angle);
+
+            projectiles.push({ x: randomX, y: randomY, vx: velocityX, vy: velocityY, size: size, color: randomColor });
+        }
+
+        // Update game state
+        function update() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (gameState === 'game') {
+                // Draw player trail
+                player.trail.forEach((position, index) => {
+                    const alpha = 0.2; // Decreased opacity for trail
+                    ctx.beginPath();
+                    ctx.arc(position.x, position.y, player.radius, 0, Math.PI * 2);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`; // Use rgba to set opacity
+                    ctx.lineWidth = player.borderWidth; // Use player's border width
+                    ctx.stroke();
+                    ctx.closePath();
+                });
+
+                // Add current player position to trail
+                player.trail.unshift({ x: player.x, y: player.y });
+
+                // Remove oldest position if trail length exceeds limit
+                if (player.trail.length > player.trailLength) {
+                    player.trail.pop();
+                }
+
+                // Draw player with glow effect
+                ctx.shadowColor = player.borderColor;
+                ctx.shadowBlur = 10; // Subtle glow effect
+                ctx.beginPath();
+                ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = player.borderColor;
+                ctx.lineWidth = player.borderWidth;
+                ctx.stroke();
+                ctx.closePath();
+
+                // Reset shadow properties
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+
+                // Update player position based on movement direction
+                player.x += player.dx;
+                player.y += player.dy;
+
+                // Limit player to the screen boundaries
+                if (player.x < player.radius) {
+                    player.x = player.radius;
+                }
+                if (player.x > canvas.width - player.radius) {
+                    player.x = canvas.width - player.radius;
+                }
+                if (player.y < player.radius) {
+                    player.y = player.radius;
+                }
+                if (player.y > canvas.height - player.radius) {
+                    player.y = canvas.height - player.radius;
+                }
+
+                // Draw projectiles
+                projectiles.forEach(projectile => {
+                    ctx.beginPath();
+                    ctx.arc(projectile.x, projectile.y, projectile.size, 0, Math.PI * 2);
+                    ctx.fillStyle = projectile.color;
+                    ctx.fill();
+                    ctx.closePath();
+
+                    // Update projectile position
+                    projectile.x += projectile.vx;
+                    projectile.y += projectile.vy;
+
+                    // Remove projectile if it goes out of bounds
+                    if (projectile.x < -projectile.size ||
+                        projectile.x > canvas.width + projectile.size ||
+                        projectile.y < -projectile.size ||
+                        projectile.y > canvas.height + projectile.size) {
+                        projectiles.splice(projectiles.indexOf(projectile), 1);
+                    }
+
+                    // Check collision with player
+                    const dx = projectile.x - player.x;
+                    const dy = projectile.y - player.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < player.radius + projectile.size) {
+                        // Collision detected, game over
+                        endGame();
+                    }
+                });
+
+                // Generate projectiles at regular intervals
+                if (Math.random() < 0.02) {
+                    generateProjectiles();
+                }
+
+                // Update score
+                score++;
+                scoreDisplay.textContent = "Score: " + score;
+            }
+
+            // Request next frame if game is running
+            if (gameState === 'game') {
+                requestAnimationFrame(update);
+            }
+        }
+
+        // Start the game
+        function startGame() {
+            gameState = 'game';
+            welcomeScreen.style.display = 'none';
+            player.dx = 0; // Reset player movement direction
+            player.dy = 0;
+            score = 0; // Reset score
+            scoreDisplay.textContent = "Score: 0"; // Reset score display
+
+            // Load high score from local storage
+            highScore = localStorage.getItem('highScore');
+            if (highScore === null) {
+                highScore = 0;
+            }
+            highScoreDisplay.textContent = highScore;
+
+            update();
+        }
+
+        // End the game
+        function endGame() {
+            gameState = 'gameOver';
+            gameOverScreen.style.display = 'flex';
+            yourScoreDisplay.textContent = score; // Display your score
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('highScore', highScore); // Save new high score
+            }
+            highScoreDisplay.textContent = highScore; // Display high score
+        }
+
+        // Restart the game
+        function restartGame() {
+            gameState = 'game';
+            gameOverScreen.style.display = 'none';
+            player.x = canvas.width / 2;
+            player.y = canvas.height / 2;
+            projectiles = [];
+            player.dx = 0; // Reset player movement direction
+            player.dy = 0;
+            player.trail = []; // Reset player trail
+            score = 0; // Reset score
+            scoreDisplay.textContent = "Score: 0"; // Reset score display
+            update();
+        }
+    </script>
+</body>
+</html>
