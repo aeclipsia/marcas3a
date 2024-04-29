@@ -142,6 +142,9 @@
         // Projectiles
         let projectiles = [];
 
+        // Laser beams
+        let laserBeams = [];
+
         // Game state
         let gameState = 'welcome'; // Possible states: welcome, game, gameOver
 
@@ -241,122 +244,220 @@
             projectiles.push({ x: randomX, y: randomY, vx: velocityX, vy: velocityY, size: size, color: randomColor, rotation: 0 });
         }
 
-        // Update game state
-        function update() {
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Function to generate laser beams
+        function generateLaserBeams() {
+            const warningDuration = 1000; // Warning duration in milliseconds
+            const beamDuration = 2000; // Beam duration in milliseconds
 
-            if (gameState === 'game') {
-                // Draw player trail
-                player.trail.forEach((position, index) => {
-                    const alpha = 0.2; // Decreased opacity for trail
-                    ctx.beginPath();
-                    ctx.arc(position.x, position.y, player.radius, 0, Math.PI * 2);
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`; // Use rgba to set opacity
-                    ctx.lineWidth = player.borderWidth; // Use player's border width
-                    ctx.stroke();
-                    ctx.closePath();
-                });
+            // Randomly select orientation: 0 for horizontal, 1 for vertical
+            const orientation = Math.floor(Math.random() * 2);
 
-                // Add current player position to trail
-                player.trail.unshift({ x: player.x, y: player.y });
-
-                // Remove oldest position if trail length exceeds limit
-                if (player.trail.length > player.trailLength) {
-                    player.trail.pop();
-                }
-
-                // Draw player with glow effect
-                ctx.shadowColor = player.borderColor;
-                ctx.shadowBlur = 10; // Subtle glow effect
-                ctx.beginPath();
-                ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
-                ctx.strokeStyle = player.borderColor;
-                ctx.lineWidth = player.borderWidth;
-                ctx.stroke();
-                ctx.closePath();
-
-                // Reset shadow properties
-                ctx.shadowColor = 'transparent';
-                ctx.shadowBlur = 0;
-
-                // Update player position based on movement direction
-                player.x += player.dx;
-                player.y += player.dy;
-
-                // Limit player to the screen boundaries
-                if (player.x < player.radius) {
-                    player.x = player.radius;
-                }
-                if (player.x > canvas.width - player.radius) {
-                    player.x = canvas.width - player.radius;
-                }
-                if (player.y < player.radius) {
-                    player.y = player.radius;
-                }
-                if (player.y > canvas.height - player.radius) {
-                    player.y = canvas.height - player.radius;
-                }
-
-                // Draw projectiles
-                projectiles.forEach(projectile => {
-                    ctx.save(); // Save the current transformation matrix
-
-                    // Translate to the projectile's position
-                    ctx.translate(projectile.x, projectile.y);
-
-                    // Rotate the context by the projectile's rotation angle
-                    ctx.rotate(projectile.rotation);
-
-                    // Draw the equilateral triangle
-                    ctx.beginPath();
-                    ctx.moveTo(0, -projectile.size);
-                    ctx.lineTo(projectile.size * Math.sqrt(3) / 2, projectile.size / 2);
-                    ctx.lineTo(-projectile.size * Math.sqrt(3) / 2, projectile.size / 2);
-                    ctx.closePath();
-                    ctx.fillStyle = projectile.color;
-                    ctx.fill();
-
-                    ctx.restore(); // Restore the saved transformation matrix
-
-                    // Update projectile position and rotation
-                    projectile.x += projectile.vx;
-                    projectile.y += projectile.vy;
-                    projectile.rotation += 0.05; // Adjust rotation speed as needed
-
-                    // Remove projectile if it goes out of bounds
-                    if (projectile.x < -projectile.size ||
-                        projectile.x > canvas.width + projectile.size ||
-                        projectile.y < -projectile.size ||
-                        projectile.y > canvas.height + projectile.size) {
-                        projectiles.splice(projectiles.indexOf(projectile), 1);
-                    }
-
-                    // Check collision with player
-                    const dx = projectile.x - player.x;
-                    const dy = projectile.y - player.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < player.radius + projectile.size) {
-                        // Collision detected, game over
-                        endGame();
-                    }
-                });
-
-                // Generate projectiles at regular intervals
-                if (Math.random() < 0.02) {
-                    generateProjectiles();
-                }
-
-                // Update score
-                score++;
-                scoreDisplay.textContent = "Score: " + score;
+            // Randomly select position along the canvas
+            let startX, startY, endX, endY;
+            if (orientation === 0) { // Horizontal beam
+                startX = 0;
+                endX = canvas.width;
+                startY = Math.random() * canvas.height;
+                endY = startY;
+            } else { // Vertical beam
+                startX = Math.random() * canvas.width;
+                endX = startX;
+                startY = 0;
+                endY = canvas.height;
             }
 
-            // Request next frame if game is running
-            if (gameState === 'game') {
-                requestAnimationFrame(update);
-            }
+            // Push the warning sign
+            const warning = { type: 'warning', x: startX, y: startY, orientation: orientation };
+            laserBeams.push(warning);
+
+            // Set timeout for warning to disappear
+            setTimeout(() => {
+                // Find the index of the warning in the laserBeams array
+                const warningIndex = laserBeams.indexOf(warning);
+                // Remove the warning sign if it still exists
+                if (warningIndex !== -1) {
+                    laserBeams.splice(warningIndex, 1);
+                    // Push the actual laser beam
+                    const beam = { type: 'beam', startX: startX, startY: startY, endX: endX, endY: endY, startTime: Date.now() };
+                    laserBeams.push(beam);
+                    // Set timeout for beam to disappear
+                    setTimeout(() => {
+                        // Find the index of the beam in the laserBeams array
+                        const beamIndex = laserBeams.indexOf(beam);
+                        // Remove the beam if it still exists
+                        if (beamIndex !== -1) {
+                            laserBeams.splice(beamIndex, 1);
+                        }
+                    }, beamDuration);
+                }
+            }, warningDuration);
         }
+
+        // Update game state
+function update() {
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (gameState === 'game') {
+        // Draw player trail
+        player.trail.forEach((position, index) => {
+            const alpha = 0.2; // Decreased opacity for trail
+            ctx.beginPath();
+            ctx.arc(position.x, position.y, player.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`; // Use rgba to set opacity
+            ctx.lineWidth = player.borderWidth; // Use player's border width
+            ctx.stroke();
+            ctx.closePath();
+        });
+
+        // Add current player position to trail
+        player.trail.unshift({ x: player.x, y: player.y });
+
+        // Remove oldest position if trail length exceeds limit
+        if (player.trail.length > player.trailLength) {
+            player.trail.pop();
+        }
+
+        // Draw player with glow effect
+        ctx.shadowColor = player.borderColor;
+        ctx.shadowBlur = 10; // Subtle glow effect
+        ctx.beginPath();
+        ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = player.borderColor;
+        ctx.lineWidth = player.borderWidth;
+        ctx.stroke();
+        ctx.closePath();
+
+        // Reset shadow properties
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+
+        // Update player position based on movement direction
+        player.x += player.dx;
+        player.y += player.dy;
+
+        // Limit player to the screen boundaries
+        if (player.x < player.radius) {
+            player.x = player.radius;
+        }
+        if (player.x > canvas.width - player.radius) {
+            player.x = canvas.width - player.radius;
+        }
+        if (player.y < player.radius) {
+            player.y = player.radius;
+        }
+        if (player.y > canvas.height - player.radius) {
+            player.y = canvas.height - player.radius;
+        }
+
+        // Draw projectiles
+        projectiles.forEach(projectile => {
+            ctx.save(); // Save the current transformation matrix
+
+            // Translate to the projectile's position
+            ctx.translate(projectile.x, projectile.y);
+
+            // Rotate the context by the projectile's rotation angle
+            ctx.rotate(projectile.rotation);
+
+            // Draw the equilateral triangle
+            ctx.beginPath();
+            ctx.moveTo(0, -projectile.size);
+            ctx.lineTo(projectile.size * Math.sqrt(3) / 2, projectile.size / 2);
+            ctx.lineTo(-projectile.size * Math.sqrt(3) / 2, projectile.size / 2);
+            ctx.closePath();
+            ctx.fillStyle = projectile.color;
+            ctx.fill();
+
+            ctx.restore(); // Restore the saved transformation matrix
+
+            // Update projectile position and rotation
+            projectile.x += projectile.vx;
+            projectile.y += projectile.vy;
+            projectile.rotation += 0.05; // Adjust rotation speed as needed
+
+            // Remove projectile if it goes out of bounds
+            if (projectile.x < -projectile.size ||
+                projectile.x > canvas.width + projectile.size ||
+                projectile.y < -projectile.size ||
+                projectile.y > canvas.height + projectile.size) {
+                projectiles.splice(projectiles.indexOf(projectile), 1);
+            }
+
+            // Check collision with player
+            const dx = projectile.x - player.x;
+            const dy = projectile.y - player.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < player.radius + projectile.size) {
+                // Collision detected, game over
+                endGame();
+            }
+        });
+
+        // Draw laser beams
+        laserBeams.forEach(beam => {
+            const timeElapsed = Date.now() - beam.startTime;
+
+            if (beam.type === 'warning') {
+                // Draw warning icon
+                const warningIconSize = 20;
+                const warningIconOffset = 10;
+                ctx.fillStyle = 'yellow';
+                if (beam.orientation === 0) { // Horizontal beam
+                    ctx.fillRect(beam.x - warningIconOffset, beam.y - warningIconSize / 2, warningIconOffset * 2, warningIconSize);
+                } else { // Vertical beam
+                    ctx.fillRect(beam.x - warningIconSize / 2, beam.y - warningIconOffset, warningIconSize, warningIconOffset * 2);
+                }
+            } else if (beam.type === 'beam') {
+                // Draw laser beam
+                const gradient = ctx.createLinearGradient(beam.startX, beam.startY, beam.endX, beam.endY);
+                gradient.addColorStop(0, "rgba(255, 0, 0, 0.5)");
+                gradient.addColorStop(0.5, "rgba(255, 0, 0, 1)");
+                gradient.addColorStop(1, "rgba(255, 0, 0, 0.5)");
+
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 5;
+                ctx.beginPath();
+                ctx.moveTo(beam.startX, beam.startY);
+                ctx.lineTo(beam.endX, beam.endY);
+                ctx.stroke();
+
+            // Check collision with player
+            const beamLength = Math.sqrt((beam.endX - beam.startX) ** 2 + (beam.endY - beam.startY) ** 2);
+            for (let t = 0; t <= 1; t += 0.01) {
+                const beamX = beam.startX + (beam.endX - beam.startX) * t;
+                const beamY = beam.startY + (beam.endY - beam.startY) * t;
+                const distance = Math.sqrt((player.x - beamX) ** 2 + (player.y - beamY) ** 2);
+                if (distance < player.radius) {
+                    // Collision detected, game over
+                    endGame();
+                    break;
+                }
+            }
+
+            }
+        });
+
+        // Generate projectiles at regular intervals
+        if (Math.random() < 0.005) {
+            generateProjectiles();
+        }
+
+        // Generate laser beams at regular intervals
+        if (Math.random() < 0.005) {
+            generateLaserBeams();
+        }
+
+        // Update score
+        score++;
+        scoreDisplay.textContent = "Score: " + score;
+    }
+
+    // Request next frame if game is running
+    if (gameState === 'game') {
+        requestAnimationFrame(update);
+    }
+}
 
         // Start the game
         function startGame() {
@@ -401,6 +502,7 @@
             player.x = canvas.width / 2;
             player.y = canvas.height / 2;
             projectiles = [];
+            laserBeams = []; // Clear laser beams
             resetKeys(); // Reset keys object
             player.dx = 0; // Reset player movement direction
             player.dy = 0;
