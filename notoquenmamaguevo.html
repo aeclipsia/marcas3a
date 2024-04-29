@@ -47,19 +47,21 @@
             margin: 0;
             font-size: 36px;
         }
-        #playButton, #restartButton {
+        #playButton{
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            border-radius: 5px;
+            background-color: transparent;
+            border: solid 3px #4CAF50;
+            color: #4CAF50;
+            border-radius: 13px;
             cursor: pointer;
             font-size: 18px;
             transition: background-color 0.3s ease;
         }
-        #playButton:hover, #restartButton:hover {
-            background-color: #45a049;
+        #playButton:hover{
+            background-color: #161616;
+            color: red;
+            border-color: red;
         }
         #scoreDisplay {
             position: absolute;
@@ -81,12 +83,19 @@
             font-size: 16px;
             margin-top: 20px;
         }
+        #spacebtn {
+            color: green;
+        }
+
+        iframe {
+            border: none;
+        }
         
         @media only screen and (max-width: 600px) {
             #welcomeScreen h1, #gameOverScreen h2 {
                 font-size: 24px;
             }
-            #playButton, #restartButton {
+            #playButton{
                 font-size: 14px;
             }
             #scoreDisplay {
@@ -102,6 +111,7 @@
     </style>
 </head>
 <body>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/s-Dq5FJEH10?autoplay=1&loop=1&playlist=s-Dq5FJEH10" frameborder="0" allow="autoplay"></iframe>
     <div id="welcomeScreen">
         <h1>¡No toquen, mamagüevo!</h1>
         <p id="instructions">Use arrow keys or WASD to move</p>
@@ -114,7 +124,7 @@
         <p>Your Score: <span id="yourScore"></span></p>
         <p>High Score: <span id="highScore"></span></p>
         <p id="gameOverCredits">Made by: aeclipsia</p>
-        <button id="restartButton">Restart</button>
+        <p>press <strong id="spacebtn">«Space»</strong> to restart</p>
     </div>
 
     <script>
@@ -159,8 +169,6 @@
 
         // Game over screen elements
         const gameOverScreen = document.getElementById('gameOverScreen');
-        const restartButton = document.getElementById('restartButton');
-        restartButton.addEventListener('click', restartGame);
         const yourScoreDisplay = document.getElementById('yourScore');
         const highScoreDisplay = document.getElementById('highScore');
         const gameOverCredits = document.getElementById('gameOverCredits');
@@ -494,6 +502,15 @@
             player.dy = 0;
             resetKeys(); // Reset keys object
         }
+
+        // Add press space to restart
+        window.addEventListener('keydown', function (e) {
+            if (e.code === 'Space') {
+                if (gameState === 'gameOver') {
+                    restartGame();
+                }
+            }
+        });
 
         // Restart the game
         function restartGame() {
