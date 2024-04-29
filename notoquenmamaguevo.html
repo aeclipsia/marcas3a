@@ -168,51 +168,44 @@
         document.body.appendChild(scoreDisplay);
 
         // Handle player movement
+        let keys = {}; // Object to track pressed keys
+
         window.addEventListener('keydown', function (e) {
             if (gameState !== 'game') return; // Only handle movement during the game state
-            switch (e.keyCode) {
-                case 37: // Left arrow
-                case 65: // A key
-                    player.dx = -player.speed;
-                    break;
-                case 38: // Up arrow
-                case 87: // W key
-                    player.dy = -player.speed;
-                    break;
-                case 39: // Right arrow
-                case 68: // D key
-                    player.dx = player.speed;
-                    break;
-                case 40: // Down arrow
-                case 83: // S key
-                    player.dy = player.speed;
-                    break;
-            }
+            keys[e.keyCode] = true; // Add the pressed key to the keys object
+            movePlayer();
         });
 
         window.addEventListener('keyup', function (e) {
             if (gameState !== 'game') return; // Only handle movement during the game state
-            switch (e.keyCode) {
-                case 37: // Left arrow
-                case 65: // A key
-                case 39: // Right arrow
-                case 68: // D key
-                    player.dx = 0;
-                    break;
-                case 38: // Up arrow
-                case 87: // W key
-                case 40: // Down arrow
-                case 83: // S key
-                    player.dy = 0;
-                    break;
-            }
+            delete keys[e.keyCode]; // Remove the released key from the keys object
+            movePlayer();
         });
+
+        // Function to move the player based on pressed keys
+        function movePlayer() {
+            player.dx = 0;
+            player.dy = 0;
+
+            if (keys[37] || keys[65]) { // Left arrow or A key
+                player.dx = -player.speed;
+            }
+            if (keys[38] || keys[87]) { // Up arrow or W key
+                player.dy = -player.speed;
+            }
+            if (keys[39] || keys[68]) { // Right arrow or D key
+                player.dx = player.speed;
+            }
+            if (keys[40] || keys[83]) { // Down arrow or S key
+                player.dy = player.speed;
+            }
+        }
 
         // Function to generate projectiles with varying speeds
         function generateProjectiles() {
             const minSpeed = 2;
             const maxSpeed = 4;
-            const size = 5;
+            const size = 10;
             const colors = ["#FF0000", "#00FF00", "#0000FF"]; // Red, Green, Blue
 
             // Randomly select side of the canvas to spawn the projectile
@@ -245,7 +238,7 @@
             velocityX = randomSpeed * Math.cos(angle);
             velocityY = randomSpeed * Math.sin(angle);
 
-            projectiles.push({ x: randomX, y: randomY, vx: velocityX, vy: velocityY, size: size, color: randomColor });
+            projectiles.push({ x: randomX, y: randomY, vx: velocityX, vy: velocityY, size: size, color: randomColor, rotation: 0 });
         }
 
         // Update game state
@@ -307,15 +300,29 @@
 
                 // Draw projectiles
                 projectiles.forEach(projectile => {
+                    ctx.save(); // Save the current transformation matrix
+
+                    // Translate to the projectile's position
+                    ctx.translate(projectile.x, projectile.y);
+
+                    // Rotate the context by the projectile's rotation angle
+                    ctx.rotate(projectile.rotation);
+
+                    // Draw the equilateral triangle
                     ctx.beginPath();
-                    ctx.arc(projectile.x, projectile.y, projectile.size, 0, Math.PI * 2);
+                    ctx.moveTo(0, -projectile.size);
+                    ctx.lineTo(projectile.size * Math.sqrt(3) / 2, projectile.size / 2);
+                    ctx.lineTo(-projectile.size * Math.sqrt(3) / 2, projectile.size / 2);
+                    ctx.closePath();
                     ctx.fillStyle = projectile.color;
                     ctx.fill();
-                    ctx.closePath();
 
-                    // Update projectile position
+                    ctx.restore(); // Restore the saved transformation matrix
+
+                    // Update projectile position and rotation
                     projectile.x += projectile.vx;
                     projectile.y += projectile.vy;
+                    projectile.rotation += 0.05; // Adjust rotation speed as needed
 
                     // Remove projectile if it goes out of bounds
                     if (projectile.x < -projectile.size ||
@@ -355,6 +362,7 @@
         function startGame() {
             gameState = 'game';
             welcomeScreen.style.display = 'none';
+            resetKeys(); // Reset keys object
             player.dx = 0; // Reset player movement direction
             player.dy = 0;
             score = 0; // Reset score
@@ -383,6 +391,7 @@
             // Reset player velocity
             player.dx = 0;
             player.dy = 0;
+            resetKeys(); // Reset keys object
         }
 
         // Restart the game
@@ -392,12 +401,18 @@
             player.x = canvas.width / 2;
             player.y = canvas.height / 2;
             projectiles = [];
+            resetKeys(); // Reset keys object
             player.dx = 0; // Reset player movement direction
             player.dy = 0;
             player.trail = []; // Reset player trail
             score = 0; // Reset score
             scoreDisplay.textContent = "Score: 0"; // Reset score display
             update();
+        }
+
+        // Function to reset keys object
+        function resetKeys() {
+            keys = {};
         }
     </script>
 </body>
